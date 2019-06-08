@@ -1,0 +1,7 @@
+Nota: Todos los proyectos de programación fueron realizados con el lenguaje de programacion JAVA utilizando APACHENETBEANS versión 11.0
+
+Las consultas y la base de datos fue realizada en MySQL Workbench utilizando los esquemas necesarios para su creación.
+
+Saludos.
+
+Jorge Luis López Payán

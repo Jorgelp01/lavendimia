@@ -1,0 +1,154 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema escuela
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema escuela
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `escuela` DEFAULT CHARACTER SET utf8 ;
+USE `escuela` ;
+
+-- -----------------------------------------------------
+-- Table `escuela`.`Estudiantes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `escuela`.`Estudiantes` (
+  `ID_Estudiante` INT NOT NULL AUTO_INCREMENT,
+  `Estu_Nomb` VARCHAR(45) NOT NULL,
+  `Estu_Apellido` VARCHAR(45) NOT NULL,
+  `Estu_Sexo` CHAR(1) NULL,
+  `Estu_Nacimiento` DATE NULL,
+  PRIMARY KEY (`ID_Estudiante`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `escuela`.`Profesor`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `escuela`.`Profesor` (
+  `ID_Profesor` INT NOT NULL AUTO_INCREMENT,
+  `Prof_Nomb` VARCHAR(45) NOT NULL,
+  `Prof_Apel` VARCHAR(45) NOT NULL,
+  `Prof_Sexo` VARCHAR(45) NULL,
+  `Prof_Fecha` VARCHAR(45) NULL,
+  PRIMARY KEY (`ID_Profesor`))
+ENGINE = InnoDB;
+
+
+
+
+
+-- -----------------------------------------------------
+-- Table `escuela`.`Asignatura`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `escuela`.`Asignatura` (
+  `ID_Asignatura` INT NOT NULL AUTO_INCREMENT,
+  `Asignatura_Nombre` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`ID_Asignatura`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `escuela`.`Notas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `escuela`.`Notas` (
+  `ID_Notas` INT NOT NULL AUTO_INCREMENT,
+  `ID_Estudiante` INT NULL,
+  `ID_Asignatura` INT NULL,
+  `ID_Profesor` INT NULL,
+  `Nota_Calificacion` INT NULL,
+  PRIMARY KEY (`ID_Notas`),
+  INDEX `fk_Notas_Estudiantes_idx` (`ID_Estudiante` ASC) VISIBLE,
+  INDEX `fk_Notas_Asignatura1_idx` (`ID_Asignatura` ASC) VISIBLE,
+  INDEX `fk_Notas_Profesor1_idx` (`ID_Profesor` ASC) VISIBLE,
+  CONSTRAINT `fk_Notas_Estudiantes`
+    FOREIGN KEY (`ID_Estudiante`)
+    REFERENCES `escuela`.`Estudiantes` (`ID_Estudiante`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Notas_Asignatura1`
+    FOREIGN KEY (`ID_Asignatura`)
+    REFERENCES `escuela`.`Asignatura` (`ID_Asignatura`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Notas_Profesor1`
+    FOREIGN KEY (`ID_Profesor`)
+    REFERENCES `escuela`.`Profesor` (`ID_Profesor`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+
+
+
+
+INSERT INTO estudiantes (Estu_Nomb,Estu_Apellido,Estu_Sexo,Estu_Nacimiento) VALUES('Juan', 'Villa', 'H','1990-09-11');
+INSERT INTO estudiantes (Estu_Nomb,Estu_Apellido,Estu_Sexo,Estu_Nacimiento) VALUES('Pedro', 'Osorio', 'H','1993-02-12');
+INSERT INTO estudiantes (Estu_Nomb,Estu_Apellido,Estu_Sexo,Estu_Nacimiento) VALUES('Michelle', 'Santillo', 'M','1992-12-22');
+INSERT INTO estudiantes (Estu_Nomb,Estu_Apellido,Estu_Sexo,Estu_Nacimiento) VALUES('Jesus', 'Mendoza', 'H','1991-01-25');
+INSERT INTO estudiantes (Estu_Nomb,Estu_Apellido,Estu_Sexo,Estu_Nacimiento) VALUES('Sanda', 'Perez', 'M','1993-02-14');
+INSERT INTO estudiantes (Estu_Nomb,Estu_Apellido,Estu_Sexo,Estu_Nacimiento) VALUES('Manuel', 'Salazar', 'H','1992-04-20');
+INSERT INTO estudiantes (Estu_Nomb,Estu_Apellido,Estu_Sexo,Estu_Nacimiento) VALUES('Carolina', 'Moreno', 'M','1998-05-10');
+INSERT INTO estudiantes (Estu_Nomb,Estu_Apellido,Estu_Sexo,Estu_Nacimiento) VALUES('Saul', 'Villa', 'H','1993-06-05');
+INSERT INTO estudiantes (Estu_Nomb,Estu_Apellido,Estu_Sexo,Estu_Nacimiento) VALUES('Sandra', 'Montes', 'M','1991-02-02');
+INSERT INTO estudiantes (Estu_Nomb,Estu_Apellido,Estu_Sexo,Estu_Nacimiento) VALUES('Eliza', 'Carrillo', 'M','1992-01-01');
+INSERT INTO estudiantes (Estu_Nomb,Estu_Apellido,Estu_Sexo,Estu_Nacimiento) VALUES('Carlos', 'Cortez', 'H','1993-11-15');
+INSERT INTO estudiantes (Estu_Nomb,Estu_Apellido,Estu_Sexo,Estu_Nacimiento) VALUES('Sonia', 'Ontiveros', 'M','1990-04-30');
+select * from Estudiantes
+
+
+
+INSERT INTO Profesor (Prof_Nomb,Prof_Apel,Prof_Sexo,Prof_Fecha) VALUES('Jaime', 'Bailiz', 'H','1980-02-25');
+INSERT INTO Profesor (Prof_Nomb,Prof_Apel,Prof_Sexo,Prof_Fecha) VALUES('Martha', 'Estela', 'M','1988-09-12');
+INSERT INTO Profesor (Prof_Nomb,Prof_Apel,Prof_Sexo,Prof_Fecha) VALUES('Pedro', 'Villa', 'H','1970-12-11');
+INSERT INTO Profesor (Prof_Nomb,Prof_Apel,Prof_Sexo,Prof_Fecha) VALUES('Liliana', 'Zazueta', 'M','1979-03-27');
+select * from Profesor
+
+
+INSERT INTO Asignatura (Asignatura_Nombre) VALUES('Sistemas');
+INSERT INTO Asignatura (Asignatura_Nombre) VALUES('Algoritmos');
+INSERT INTO Asignatura (Asignatura_Nombre) VALUES('Matematicas');
+select * from Asignatura
+
+
+INSERT INTO Notas (ID_Estudiante,ID_Asignatura,ID_Profesor,Nota_Calificacion) VALUES('1', '2', '1','98');
+INSERT INTO Notas (ID_Estudiante,ID_Asignatura,ID_Profesor,Nota_Calificacion) VALUES('2', '1', '3','77');
+INSERT INTO Notas (ID_Estudiante,ID_Asignatura,ID_Profesor,Nota_Calificacion) VALUES('12', '2', '4','40');
+INSERT INTO Notas (ID_Estudiante,ID_Asignatura,ID_Profesor,Nota_Calificacion) VALUES('3', '3', '2','90');
+INSERT INTO Notas (ID_Estudiante,ID_Asignatura,ID_Profesor,Nota_Calificacion) VALUES('4', '3', '3','55');
+INSERT INTO Notas (ID_Estudiante,ID_Asignatura,ID_Profesor,Nota_Calificacion) VALUES('6', '2', '1','60');
+INSERT INTO Notas (ID_Estudiante,ID_Asignatura,ID_Profesor,Nota_Calificacion) VALUES('8', '1', '1','77');
+INSERT INTO Notas (ID_Estudiante,ID_Asignatura,ID_Profesor,Nota_Calificacion) VALUES('10', '1', '2','18');
+INSERT INTO Notas (ID_Estudiante,ID_Asignatura,ID_Profesor,Nota_Calificacion) VALUES('9', '2', '3','70');
+INSERT INTO Notas (ID_Estudiante,ID_Asignatura,ID_Profesor,Nota_Calificacion) VALUES('11', '3', '3','80');
+INSERT INTO Notas (ID_Estudiante,ID_Asignatura,ID_Profesor,Nota_Calificacion) VALUES('9', '2', '4','88');
+INSERT INTO Notas (ID_Estudiante,ID_Asignatura,ID_Profesor,Nota_Calificacion) VALUES('5', '2', '4','30');
+INSERT INTO Notas (ID_Estudiante,ID_Asignatura,ID_Profesor,Nota_Calificacion) VALUES('7', '2', '1','20');
+INSERT INTO Notas (ID_Estudiante,ID_Asignatura,ID_Profesor,Nota_Calificacion) VALUES('3', '3', '2','100');
+INSERT INTO Notas (ID_Estudiante,ID_Asignatura,ID_Profesor,Nota_Calificacion) VALUES('1', '1', '1','19');
+SELECT * FROM Notas
+
+DROP table Notas
+
+--Consulta que nos trae el top 10 de los alumnos con su respectivo maestro y calificaicon
+select CONCAT(Estu_Nomb," ", Estu_Apellido) AS Alumno,CONCAT(Prof_Nomb," ", Prof_Apel) AS Profesor,Asignatura_Nombre AS Materia,Nota_Calificacion AS Calificacion
+from Estudiantes
+Inner Join Notas
+Inner Join Asignatura
+Inner Join Profesor
+Order by Nota_Calificacion DESC
+limit 10
+
+select *
+from notas
